@@ -1,4 +1,5 @@
 # Command
+ISORT = isort .
 BLACK = black .
 FORMAT = ruff check .
 ALEMBIC = alembic
@@ -14,12 +15,15 @@ UPG_FLAGS = upgrade head
 UV_FLAGS = --host 0.0.0.0 --port 8000 --reload
 DOCKER_FL = up --build
 
-dc: format 
-	$(BLACK) && $(FORMAT) --fix
+dc:
+	$(ISORT) && $(BLACK) && $(FORMAT) --fix
 	$(DOCKER) $(DOCKER_FL)
 
-format:
+format-check:
 	$(FORMAT)
+
+format:
+	$(ISORT) && $(BLACK) && $(FORMAT) --fix
 
 migrations:
 	echo "⏳ Ждём, пока Postgres будет готов..."

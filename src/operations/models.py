@@ -1,3 +1,4 @@
+from pydantic import BaseModel
 from sqlalchemy import Integer, String
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
@@ -13,3 +14,9 @@ class Book(Base):
     title: Mapped[str] = mapped_column(String(255), index=True)
     author: Mapped[str] = mapped_column(String(255))
     year: Mapped[int] = mapped_column(Integer)
+
+
+class BookUpdate(BaseModel):
+    title: str
+    author: str
+    year: int

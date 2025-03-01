@@ -7,6 +7,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-RUN make format
+RUN make format-check
 
 ENTRYPOINT ["sh", "-c", "make migrations && make run"]
