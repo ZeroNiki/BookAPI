@@ -31,6 +31,7 @@ debug.log
 *.sublime-project
 
 # Cache files
+.ruff_cache
 .cache/
 .mypy_cache/
 .pytest_cache/
