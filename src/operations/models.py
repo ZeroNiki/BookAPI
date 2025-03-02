@@ -16,6 +16,12 @@ class Book(Base):
     year: Mapped[int] = mapped_column(Integer)
 
 
+class BookCreate(BaseModel):
+    title: str
+    author: str
+    year: int
+
+
 class BookUpdate(BaseModel):
     title: str
     author: str

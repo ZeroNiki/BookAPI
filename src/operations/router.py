@@ -3,7 +3,7 @@ from sqlalchemy.future import select
 
 from fastapi import APIRouter, Depends, HTTPException
 from src.database import get_db
-from src.operations.models import Book, BookUpdate
+from src.operations.models import Book, BookCreate, BookUpdate
 
 router = APIRouter(prefix="/books", tags=["Books API"])
 
@@ -15,13 +15,11 @@ async def get_all_books(db: AsyncSession = Depends(get_db)):
 
 
 @router.post("/")
-async def add_book(
-    title: str, author: str, year: int, db: AsyncSession = Depends(get_db)
-):
-    new_book = Book(title=title, author=author, year=year)
+async def add_book(book: BookCreate, db: AsyncSession = Depends(get_db)):
+    new_book = Book(title=book.title, author=book.author, year=book.year)
     db.add(new_book)
     await db.commit()
-    return {"Message": "Book added!"}
+    return {"Message": "Book added!", "id": new_book.id}
 
 
 @router.get("/{book_id}")
