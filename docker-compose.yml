@@ -10,6 +10,17 @@ services:
     volumes:
       - pg_data:/var/lib/postgresql/data
 
+  test_db:
+    image: postgres:latest
+    container_name: postgres-test-db
+    restart: always
+    ports:
+      - "5433:5432"
+    env_file:
+      - .env
+    volumes:
+      - pg_test_data:/var/lib/postgresql/data
+
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin
@@ -35,3 +46,4 @@ services:
 
 volumes:
   pg_data:
+  pg_test_data:
